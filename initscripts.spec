@@ -55,6 +55,9 @@ rm -f %{buildroot}%{_sysconfdir}/rc.d/rc.local %{buildroot}%{_sysconfdir}/rc.loc
 touch %{buildroot}%{_sysconfdir}/rc.d/rc.local
 chmod 755 %{buildroot}%{_sysconfdir}/rc.d/rc.local
 
+mkdir -p %{buildroot}%{_libexecdir}/initscripts
+mkdir -p %{buildroot}%{_libexecdir}/initscripts/legacy-actions
+
 %post
 %systemd_post fedora-import-state.service fedora-loadmodules.service fedora-readonly.service
 
