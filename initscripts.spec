@@ -59,10 +59,6 @@ chmod 755 %{buildroot}%{_sysconfdir}/rc.d/rc.local
 mkdir -p %{buildroot}%{_libexecdir}/initscripts
 mkdir -p %{buildroot}%{_libexecdir}/initscripts/legacy-actions
 
-rm -f ${buildroot}/run/netreport
-chmod -s %{buildroot}%{_sbindir}/netreport
-chmod -s %{buildroot}%{_sbindir}/usernetctl
-
 %post
 %systemd_post fedora-import-state.service fedora-loadmodules.service fedora-readonly.service
 
@@ -144,16 +140,15 @@ fi
 %{_sysconfdir}/profile.d/*
 %{_sbindir}/sys-unconfig
 %{_bindir}/usleep
-%attr(4755,root,root) %{_sbindir}/usernetctl
+%attr(755,root,root) %{_sbindir}/usernetctl
 %{_sbindir}/consoletype
 %{_sbindir}/genhostid
 %{_sbindir}/sushell
-%attr(2755,root,root) %{_sbindir}/netreport
+%attr(755,root,root) %{_sbindir}/netreport
 %{_udevrulesdir}/*
 %{_prefix}/lib/udev/rename_device
 %{_sbindir}/service
 %{_mandir}/man*/*
-%dir %attr(775,root,root) /run/netreport
 %dir %{_sysconfdir}/NetworkManager
 %dir %{_sysconfdir}/NetworkManager/dispatcher.d
 %{_sysconfdir}/NetworkManager/dispatcher.d/00-netreport
