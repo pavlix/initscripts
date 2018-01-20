@@ -59,6 +59,8 @@ chmod 755 %{buildroot}%{_sysconfdir}/rc.d/rc.local
 mkdir -p %{buildroot}%{_libexecdir}/initscripts
 mkdir -p %{buildroot}%{_libexecdir}/initscripts/legacy-actions
 
+chmod -s %{buildroot}%{_sbindir}/netreport %{buildroot}%{_sbindir}/usernetctl
+
 %post
 %systemd_post fedora-import-state.service fedora-loadmodules.service fedora-readonly.service
 
