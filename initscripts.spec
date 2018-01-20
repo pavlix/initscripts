@@ -30,6 +30,7 @@ Requires(preun): /sbin/chkconfig
 %{?systemd_requires}
 BuildRequires: glib2-devel popt-devel gettext pkgconfig systemd
 Provides: /sbin/service
+BuildRequires: -post-build-checks
 
 %description
 This package contains the script that activates and deactivates most
