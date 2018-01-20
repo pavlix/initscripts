@@ -6,6 +6,7 @@ Group: System Environment/Base
 Release: 1%{?dist}
 URL: https://github.com/fedora-sysv/initscripts
 Source: https://github.com/fedora-sysv/initscripts/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1: %name-rpmlintrc
 Requires: /bin/awk, sed, coreutils
 Requires: grep
 Requires: module-init-tools
@@ -30,7 +31,6 @@ Requires(preun): /sbin/chkconfig
 %{?systemd_requires}
 BuildRequires: glib2-devel popt-devel gettext pkgconfig systemd
 Provides: /sbin/service
-BuildRequires: -post-build-checks
 
 %description
 This package contains the script that activates and deactivates most
