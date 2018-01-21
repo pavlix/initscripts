@@ -6,7 +6,7 @@ Group: System Environment/Base
 Release: 1%{?dist}
 URL: https://github.com/fedora-sysv/initscripts
 Source: https://github.com/fedora-sysv/initscripts/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1: %name-rpmlintrc
+Source1: %{name}-rpmlintrc
 Requires: /bin/awk, sed, coreutils
 Requires: grep
 Requires: module-init-tools
@@ -35,6 +35,12 @@ Provides: /sbin/service
 %description
 This package contains the script that activates and deactivates most
 network interfaces, some utilities, and other legacy files.
+
+%package network
+Summary: Legacy network configuration files
+
+%description network
+This package contains the legacy network configuration files.
 
 %prep
 %setup -q
@@ -85,44 +91,14 @@ fi
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%dir %{_sysconfdir}/sysconfig/network-scripts
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/adjtime
 %config(noreplace) %{_sysconfdir}/sysconfig/netconsole
 %config(noreplace) %{_sysconfdir}/sysconfig/readonly-root
-%{_sysconfdir}/sysconfig/network-scripts/ifdown
 %{_sbindir}/ifdown
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-post
-%{_sysconfdir}/sysconfig/network-scripts/ifup
 %{_sbindir}/ifup
 %dir %{_sysconfdir}/sysconfig/console
 %dir %{_sysconfdir}/sysconfig/modules
-%{_sysconfdir}/sysconfig/network-scripts/network-functions
-%{_sysconfdir}/sysconfig/network-scripts/network-functions-ipv6
-%{_sysconfdir}/sysconfig/network-scripts/init.ipv6-global
-%config(noreplace) %{_sysconfdir}/sysconfig/network-scripts/ifcfg-lo
-%{_sysconfdir}/sysconfig/network-scripts/ifup-post
-%{_sysconfdir}/sysconfig/network-scripts/ifup-routes
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-routes
-%{_sysconfdir}/sysconfig/network-scripts/ifup-plip
-%{_sysconfdir}/sysconfig/network-scripts/ifup-plusb
-%{_sysconfdir}/sysconfig/network-scripts/ifup-bnep
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-bnep
-%{_sysconfdir}/sysconfig/network-scripts/ifup-eth
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-eth
-%{_sysconfdir}/sysconfig/network-scripts/ifup-ipv6
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-ipv6
-%{_sysconfdir}/sysconfig/network-scripts/ifup-sit
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-sit
-%{_sysconfdir}/sysconfig/network-scripts/ifup-tunnel
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-tunnel
-%{_sysconfdir}/sysconfig/network-scripts/ifup-aliases
-%{_sysconfdir}/sysconfig/network-scripts/ifup-ippp
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-ippp
-%{_sysconfdir}/sysconfig/network-scripts/ifup-wireless
-%{_sysconfdir}/sysconfig/network-scripts/ifup-isdn
-%{_sysconfdir}/sysconfig/network-scripts/ifdown-isdn
 %ifarch s390 s390x
-%{_sysconfdir}/sysconfig/network-scripts/ifup-ctc
 %endif
 %config(noreplace) %{_sysconfdir}/networks
 %config(noreplace) %{_sysconfdir}/rwtab
@@ -152,7 +128,6 @@ fi
 %dir %{_sysconfdir}/NetworkManager
 %dir %{_sysconfdir}/NetworkManager/dispatcher.d
 %{_sysconfdir}/NetworkManager/dispatcher.d/00-netreport
-%doc sysconfig.txt sysvinitfiles static-routes-ipv6 ipv6-tunnel.howto ipv6-6to4.howto changes.ipv6
 %doc examples
 %{!?_licensedir:%global license %%doc}
 %license COPYING
@@ -160,3 +135,36 @@ fi
 %{_tmpfilesdir}/initscripts.conf
 %dir %{_libexecdir}/initscripts
 %dir %{_libexecdir}/initscripts/legacy-actions
+
+%files network
+%doc sysconfig.txt sysvinitfiles static-routes-ipv6 ipv6-tunnel.howto ipv6-6to4.howto changes.ipv6
+%dir %{_sysconfdir}/sysconfig/network-scripts
+%{_sysconfdir}/sysconfig/network-scripts/ifdown
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-post
+%{_sysconfdir}/sysconfig/network-scripts/ifup
+%{_sysconfdir}/sysconfig/network-scripts/network-functions
+%{_sysconfdir}/sysconfig/network-scripts/network-functions-ipv6
+%{_sysconfdir}/sysconfig/network-scripts/init.ipv6-global
+%config(noreplace) %{_sysconfdir}/sysconfig/network-scripts/ifcfg-lo
+%{_sysconfdir}/sysconfig/network-scripts/ifup-post
+%{_sysconfdir}/sysconfig/network-scripts/ifup-routes
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-routes
+%{_sysconfdir}/sysconfig/network-scripts/ifup-plip
+%{_sysconfdir}/sysconfig/network-scripts/ifup-plusb
+%{_sysconfdir}/sysconfig/network-scripts/ifup-bnep
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-bnep
+%{_sysconfdir}/sysconfig/network-scripts/ifup-eth
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-eth
+%{_sysconfdir}/sysconfig/network-scripts/ifup-ipv6
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-ipv6
+%{_sysconfdir}/sysconfig/network-scripts/ifup-sit
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-sit
+%{_sysconfdir}/sysconfig/network-scripts/ifup-tunnel
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-tunnel
+%{_sysconfdir}/sysconfig/network-scripts/ifup-aliases
+%{_sysconfdir}/sysconfig/network-scripts/ifup-ippp
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-ippp
+%{_sysconfdir}/sysconfig/network-scripts/ifup-wireless
+%{_sysconfdir}/sysconfig/network-scripts/ifup-isdn
+%{_sysconfdir}/sysconfig/network-scripts/ifdown-isdn
+%{_sysconfdir}/sysconfig/network-scripts/ifup-ctc
