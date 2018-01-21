@@ -98,8 +98,6 @@ fi
 %{_sbindir}/ifup
 %dir %{_sysconfdir}/sysconfig/console
 %dir %{_sysconfdir}/sysconfig/modules
-%ifarch s390 s390x
-%endif
 %config(noreplace) %{_sysconfdir}/networks
 %config(noreplace) %{_sysconfdir}/rwtab
 %config(noreplace) %{_sysconfdir}/statetab
@@ -167,4 +165,6 @@ fi
 %{_sysconfdir}/sysconfig/network-scripts/ifup-wireless
 %{_sysconfdir}/sysconfig/network-scripts/ifup-isdn
 %{_sysconfdir}/sysconfig/network-scripts/ifdown-isdn
+%ifarch s390 s390x
 %{_sysconfdir}/sysconfig/network-scripts/ifup-ctc
+%endif
